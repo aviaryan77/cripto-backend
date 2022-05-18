@@ -87,7 +87,7 @@ app.get('/cryptos/market-data/:id', (req, res) => {
 
   axios
     .get(
-      `https://data.messari.io/api/v1/assets/${assetKey}/metrics/market-data`,
+      `https://data.messari.io/api/v1/assets/${cryptoId}/metrics/market-data`,
       {
         headers: { 'x-messari-api-key': process.env.CRYPTO_API_KEY },
       }
