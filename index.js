@@ -46,7 +46,7 @@ const getPrices = () => {
 
 setInterval(() => {
   getPrices();
-}, 6000000);
+}, 60000);
 
 app.get('./cryptos/profile/:id', (req, res) => {
   const cryptoId = req.params.id;
