@@ -48,8 +48,14 @@ setInterval(() => {
   getPrices();
 }, 60000);
 
-app.get('./cryptos/profile/:id', (req, res) => {
+app.get('/cryptos/profile', (req, res) => {
+  res.json({ error: true, message: 'Missing Crypto Id in the API URL' });
+});
+
+app.get('/cryptos/profile/:id', (req, res) => {
   const cryptoId = req.params.id;
+  console.log('cryptoId', cryptoId);
+
   if (!cryptoId) {
     res.json({ error: true, message: 'Missing crypto id in the url' });
   }
@@ -59,9 +65,11 @@ app.get('./cryptos/profile/:id', (req, res) => {
       headers: { 'x-messari-api-key': process.env.CRYPTO_API_KEY },
     })
     .then((responseData) => {
+      console.log('responseData.data', responseData.data);
       res.json(responseData.data.data);
     })
     .catch((err) => {
+      console.log('error', error);
       res.json('crypto', {
         error: true,
         message: 'Error fetching price data from api',
@@ -70,8 +78,9 @@ app.get('./cryptos/profile/:id', (req, res) => {
     });
 });
 
-app.get('./cryptos/market-data/:id', (req, res) => {
+app.get('/cryptos/market-data/:id', (req, res) => {
   const cryptoId = req.params.id;
+  console.log('cryptoId', cryptoId);
   if (!cryptoId) {
     res.json({ error: true, message: 'Missing crypto id in the url' });
   }
@@ -84,9 +93,12 @@ app.get('./cryptos/market-data/:id', (req, res) => {
       }
     )
     .then((responseData) => {
+      console.log('responseData.data', responseData.data);
+      res.json(responseData.data.data);
       res.json(responseData.data.data);
     })
     .catch((err) => {
+      console.log('err', err);
       res.json('crypto', {
         error: true,
         message: 'Error fetching price data from api',
