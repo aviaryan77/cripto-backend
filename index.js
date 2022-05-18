@@ -94,8 +94,7 @@ app.get('/cryptos/market-data/:id', (req, res) => {
     )
     .then((responseData) => {
       console.log('responseData.data', responseData.data);
-      res.json(responseData.data.data);
-      res.json(responseData.data.data);
+      res.json(responseData?.data?.data);
     })
     .catch((err) => {
       console.log('err', err);
